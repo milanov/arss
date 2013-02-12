@@ -1,6 +1,6 @@
 = arss
 
-A very simple RSS 2.0 only parser. It's part of a project (a feed reader), but I thought it would be good to separate it in a gem.
+A very simple and opinianated parser.
 
 == Contributing to arss
 
