@@ -10,7 +10,7 @@ module Arss
 
     describe 'remove_comments' do
       it 'can remove empty comments' do
-        data.remove_comments('<!---->').should eq ''
+        data.remove_comments('<!---->').should be_empty
       end
 
       it 'can remove multiline comments' do
@@ -73,7 +73,7 @@ TEXT
 
     describe 'remove_html_tags' do
       it 'works on an empty string' do
-        data.remove_html_tags('').should eq ''
+        data.remove_html_tags('').should be_empty
       end
 
       it 'works on a simple text which does not have any html tags' do

@@ -10,7 +10,7 @@ module Arss
 
     describe 'extract_text_from_tag' do
       it 'returns an empty string when there is no such tag' do
-        data.extract_text_from_tag('simple text', 'div').should eq ''
+        data.extract_text_from_tag('simple text', 'div').should be_empty
       end
 
       it 'extracts the text from a simple tag' do
@@ -38,7 +38,7 @@ TEXT
 
     describe 'list_same_tag_data' do
       it 'returns an empty list when there are no such tags' do
-        data.list_same_tag_data('simple text', 'div').should eq []
+        data.list_same_tag_data('simple text', 'div').should be_empty
       end
 
       it 'extracts data from simple tags' do

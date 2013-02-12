@@ -65,7 +65,7 @@ TEXT
 
     describe 'transform_date' do
       it 'returns an empty string for a text that is not a properly formatted date (RFC-822)' do
-        data.transform_date('simple text').should eq ''
+        data.transform_date('simple text').should be_empty
       end
 
       # example source: http://en.wikipedia.org/wiki/Unix_time#Notable_events_in_Unix_time

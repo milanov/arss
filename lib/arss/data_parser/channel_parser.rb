@@ -1,8 +1,5 @@
 # encoding: utf-8
 
-require 'arss/data_extract'
-require 'arss/data_transform'
-
 module Arss
   module DataParser
     module ChannelParser
@@ -17,14 +14,14 @@ module Arss
       # by the RSS specification. It also transofrms the pubDate/lastBuildDate tags
       # from a text-formatted date to a unix timestamp.
       def parse_channel_tag(rss_feed)
-        channel_text = extract_text_from_tag rss_feed, 'channel'
+        channel_text = DataExtract.extract_text_from_tag rss_feed, 'channel'
         channel_tags = {}
 
         CHANNEL_TAGS.each do |tag|
-          tag_text = extract_text_from_tag(channel_text, tag)
+          tag_text = DataExtract.extract_text_from_tag(channel_text, tag)
           next if tag_text.empty?
           channel_tags[tag] = case tag
-                              when 'pubDate', 'lastBuildDate' then transform_date(tag_text)
+                              when 'pubDate', 'lastBuildDate' then DataTransform.transform_date(tag_text)
                               else tag_text
                               end
         end
