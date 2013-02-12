@@ -1,6 +1,6 @@
 = arss
 
-A very simple and opinianated parser.
+A very simple and opinionated parser.
 
 == Contributing to arss
 
