@@ -3,7 +3,7 @@
 require 'open-uri'
 
 module Arss
-  module DataExtract
+  module ExtractData
     extend self
 
     # Extracts and returns the contents of a given url.

@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 module Arss
-  describe DataExtract do
+  describe ExtractData do
     let(:data) do
-      Class.new.extend(DataExtract)
+      Class.new.extend(ExtractData)
     end
 
     describe 'extract_text_from_tag' do

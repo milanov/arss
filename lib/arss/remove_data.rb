@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module Arss
-  module DataRemoval
+  module RemoveData
     extend self
 
     # Removes all html/xml-style comments from a given text.

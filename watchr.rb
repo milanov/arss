@@ -1,11 +1,12 @@
 watch(%r{spec/arss/.*?.rb}) do |m|
   system 'cls'
 
-  success = system 'rake unit'
+  tests_success = system 'rake unit'
 
-  if success
+  if tests_success
     system 'color 02'
     puts 'Tests successfully executed :)'
+    system 'rake style'
   else
     system 'color 04'
     puts 'Tests failed ;('

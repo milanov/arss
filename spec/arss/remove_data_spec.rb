@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 module Arss
-  describe DataRemoval do
+  describe RemoveData do
     let(:data) do
-      Class.new.extend(DataRemoval)
+      Class.new.extend(RemoveData)
     end
 
     describe 'remove_comments' do
