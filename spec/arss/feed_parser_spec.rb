@@ -13,9 +13,10 @@ module Arss
       it 'parses a given rss feed correctly according to the RSS 2.0 specification' do
         feed = <<-FEED
         <rss>
+          <!-- look at me now -->
           <channel>
             <title>Pedro Almodovar</title>
-            <description>A list of some of Almodovar's best movies.</description>
+            <description><![CDATA[A list of some of <description>Almodovar's</description> best movies.]]></description>
             <image>
               <width>2</width>
               <height>2</height>
