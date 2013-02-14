@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 # the order in which the files are included matters :)
-require 'arss/tags_specifications/rss_tags.rb'
+require 'arss/feeds_specifications/rss.rb'
 
 require 'arss/remove_data'
 require 'arss/extract_data'
