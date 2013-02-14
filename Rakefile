@@ -27,5 +27,6 @@ require 'rspec/core'
 require 'rspec/core/rake_task'
 desc 'Run unit specs'
 RSpec::Core::RakeTask.new('unit') do |t|
+  t.ruby_opts = '-w'
   t.pattern = FileList['spec/**/*_spec.rb']
 end

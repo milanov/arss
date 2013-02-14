@@ -14,19 +14,19 @@ module Arss
     #   encode_cdata_data('<xml><data><![CDATA[</xml></data>]]></data></xml>')
     #   # => <xml><data><![CDATA[&lt;/xml&gt;&lt;/data&gt;]]></data></xml>
     def encode_data_in_cdata_tags(rss_text)
-      rss_text.gsub /<!\[CDATA\[(?<element_text>.*?)\]\]>/m do
+      rss_text.gsub(/<!\[CDATA\[(?<element_text>.*?)\]\]>/m) do
         '<![CDATA[' + HTMLEntities.new.encode($~[:element_text]) + ']]>'
       end
     end
 
     # A very OPINIONATED method. It is used to "clean up" the data that is in
-    # the <item> tags in a rss document. It removes the enclosing cdata tag
+    # all of the tags in a document. It removes the enclosing cdata tag
     # if present, decodes the html in case it is encoded and then removes it,
     # leaving only the plain text (stripping any whitespace).
     def tag_to_plaintext(item_tag)
       decoded_tag = HTMLEntities.new.decode RemoveData.remove_cdata(item_tag)
       plain_text = RemoveData.remove_html_tags decoded_tag
-      plain_text.gsub /\s+/, ' '
+      plain_text.gsub(/\s+/, ' ')
     end
 
     # Transforms a given date from a RFC 822 format to a unix

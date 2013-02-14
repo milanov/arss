@@ -42,7 +42,7 @@ TEXT
       end
 
       it 'extracts data from simple tags' do
-        data.list_same_tag_data('<b>simple</b><b>text</b>', 'b').should eq ['simple', 'text']
+        data.list_same_tag_data('<b>simple</b><b>text</b>', 'b').should eq %w(simple text)
       end
 
       it 'extracts data from tags with attributes' do

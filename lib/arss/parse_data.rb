@@ -4,7 +4,7 @@ module Arss
   module ParseData
     extend self
 
-    # Exctracts all <item> tags from a given rss document and parses them
+    # Exctracts all <item> tags from a given document and parses them
     # individually using DataParser::extract_tags.
     # Returns an array of associative arrays with keys being the <item>'s tags
     # and their corresponding values.
@@ -13,7 +13,7 @@ module Arss
       parsed_items = []
 
       items.each do |item|
-        parsed_item = parse_tag('item', RssTags::ITEMS_TAGS, item)
+        parsed_item = parse_tag('item', RssSpecification::ITEM_TAGS, item)
         parsed_items << parsed_item unless parsed_item.empty?
       end
 
@@ -28,9 +28,9 @@ module Arss
       extracted_subtags = {}
       feed = ExtractData.extract_text_from_tag(feed, tag)
 
-      subtags.each do |tag|
-        tag_text = ExtractData.extract_text_from_tag(feed, tag)
-        extracted_subtags[tag] = TransformData.tag_to_plaintext(tag_text) unless tag_text.empty?
+      subtags.each do |sub|
+        sub_text = ExtractData.extract_text_from_tag(feed, sub)
+        extracted_subtags[sub] = TransformData.tag_to_plaintext(sub_text) unless sub_text.empty?
       end
 
       transform_dates_in extracted_subtags
