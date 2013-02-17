@@ -63,9 +63,9 @@ TEXT
 
       it 'works with multiline text' do
         text = <<TEXT
-text with
+<![CDATA[text with
  new
- lines
+ lines]]>
 TEXT
         data.remove_cdata(text.chomp).should eq "text with\n new\n lines"
       end

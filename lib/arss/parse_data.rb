@@ -26,10 +26,11 @@ module Arss
     # tags in a given feed.
     def parse_tag(tag, subtags, feed)
       extracted_subtags = {}
-      feed = ExtractData.extract_text_from_tag(feed, tag)
+      feed = ExtractData.extract_tag_text(feed, tag)
 
+      # TODO extract directly from tag
       subtags.each do |sub|
-        sub_text = ExtractData.extract_text_from_tag(feed, sub)
+        sub_text = ExtractData.extract_subtag_text(feed, sub)
         extracted_subtags[sub] = TransformData.tag_to_plaintext(sub_text) unless sub_text.empty?
       end
 

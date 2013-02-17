@@ -8,13 +8,13 @@ module Arss
       Class.new.extend(ExtractData)
     end
 
-    describe 'extract_text_from_tag' do
+    describe 'extract_tag_text' do
       it 'returns an empty string when there is no such tag' do
-        data.extract_text_from_tag('simple text', 'div').should be_empty
+        data.extract_tag_text('simple text', 'div').should be_empty
       end
 
       it 'extracts the text from a simple tag' do
-        data.extract_text_from_tag('<span>ham</span>', 'span').should eq 'ham'
+        data.extract_tag_text('<span>ham</span>', 'span').should eq 'ham'
       end
 
       it 'extracts the text from a tag with attributes' do
@@ -22,18 +22,42 @@ module Arss
         Frankly, my dear,
         I don't <span style="color: red;">give</span> a damn.
         TEXT
-        data.extract_text_from_tag(text, 'span').should eq 'give'
+        data.extract_tag_text(text, 'span').should eq 'give'
       end
 
-      it 'works with multiline text in a tag' do
+      it 'works with multiline text in tags' do
         text = <<TEXT
 <line>I'm going
  to make him
  an offer
  he can't refuse.</line>
 TEXT
-        data.extract_text_from_tag(text, 'line').should eq "I'm going\n to make him\n an offer\n he can't refuse."
+        data.extract_tag_text(text, 'line').should eq "I'm going\n to make him\n an offer\n he can't refuse."
       end
+
+      it 'supports unicode characters' do
+        data.extract_tag_text('<title>Новини</title>', 'title').should eq 'Новини'
+      end
+
+      it 'works with multiline unicode text in tags' do
+        text = <<TEXT
+<title>Горещи
+новини</title>
+</title>
+TEXT
+        data.extract_tag_text(text, 'title').should eq "Горещи\nновини"
+      end
+    end
+
+    describe 'extract_subtag_text' do
+      it 'returns an empty string when there is no such tag' do
+        data.extract_subtag_text('simple text', 'div').should be_empty
+      end
+
+      it 'extracts only direct subtags' do
+        data.extract_subtag_text('<div><p>simple text</p></div>', 'p').should eq ''
+      end
+
     end
 
     describe 'list_same_tag_data' do
@@ -59,6 +83,23 @@ I ate his liver with some fava beans and a nice Chianti.</movie>
 TEXT
         expected = ["A census taker once tried to test me.\nI ate his liver with some fava beans and a nice Chianti."]
         data.list_same_tag_data(text, 'movie').should eq expected
+      end
+
+      it 'supports unicode characters' do
+        text = <<TEXT
+<ul>Едно</ul>
+<ul>Две</ul>
+<ul>Три</ul>
+TEXT
+        data.list_same_tag_data(text, 'ul').should eq %w(Едно Две Три)
+      end
+
+      it 'works with multiline unicode text' do
+        text = <<TEXT
+<quote>Няма съвпадения.
+Има само илюзия за съвпадения.</quote>
+TEXT
+        data.list_same_tag_data(text, 'quote').should eq ["Няма съвпадения.\nИма само илюзия за съвпадения."]
       end
     end
   end
