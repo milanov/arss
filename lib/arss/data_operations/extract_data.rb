@@ -21,7 +21,7 @@ module Arss
     # Returns the text between a given tag in a document, otherwise an
     # empty string.
     def extract_tag_text(text, tag)
-      text =~ /<#{tag}.*?>(?<tag_text>.*?)<\/#{tag}>/m ? $~[:tag_text] : ''
+      text =~ /<#{tag}( [^\/]+)*>(?<tag_text>.*?)<\/#{tag}>/m ? $~[:tag_text] : ''
     end
 
     # Returns the text between a given tag in a document, but only if the tag a level 1 tag, e.g.
@@ -34,12 +34,12 @@ module Arss
     #   extract_subtag_text('<xml><tag>text</tag></xml>', 'tag')
     #   # => ''
 
-    # TODO HERE -> <span> <spanAK> <span asd>
+    # TODO HERE -> WARNING
     def extract_subtag_text(text, subtag)
-      if text =~ /(?<tag><#{subtag}( [ ^\/]*?)?>(?<tag_text>.*?)<\/#{subtag}>)/m
+      if text =~ /(?<tag><#{subtag}( [^ \/>]+)*?>(?<tag_text>.*?)<\/#{subtag}>)/m
         tag, tag_text =  $~[:tag], $~[:tag_text]
 
-        unless text =~ /<(?<tag>[\w]+)( [ ^\/]*?)?>(?<anything>.*?)#{tag}\g<anything><\/\k<tag>>/
+        unless text =~ /<(?<tag>[\w:]+)( [^ \/>]+)*?>(?<anything>.*?)#{Regexp.escape(tag)}\g<anything><\/\k<tag>>/m
           return tag_text
         end
       end
@@ -52,7 +52,7 @@ module Arss
     #   list_same_tag_data('<li>1</li><li>2</li><li>3</li>', 'li')
     #   # => ['1', '2', '3']
     def list_same_tag_data(text, tag)
-      text.scan(/<#{tag}.*?>(?<tag_text>.*?)<\/#{tag}>/m).map(&:first)
+      text.scan(/<#{tag}( [^ \/>]+)*?>(?<tag_text>.*?)<\/#{tag}>/m).map(&:first)
     end
   end
 end

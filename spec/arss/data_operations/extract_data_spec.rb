@@ -17,6 +17,10 @@ module Arss
         data.extract_tag_text('<span>ham</span>', 'span').should eq 'ham'
       end
 
+      it 'does not get confused with tricky tags' do
+        data.extract_tag_text('<spanak>ham</span>', 'span').should be_empty
+      end
+
       it 'extracts the text from a tag with attributes' do
         text = <<-TEXT
         Frankly, my dear,
