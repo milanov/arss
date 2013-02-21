@@ -7,10 +7,10 @@ module Arss
     # initializes the class with the already parsed rss attributes
     def initialize(channel_tags, textinput_tags, image_tags, items)
       @feed = {}
-      @feed['channel'] = channel_tags unless channel_tags.empty?
-      @feed['channel']['textinput'] = textinput_tags unless textinput_tags.empty?
-      @feed['channel']['image'] = image_tags unless image_tags.empty?
-      @feed['channel']['items'] = items unless items.empty?
+      @feed['channel'] = channel_tags
+      @feed['channel']['textinput'] = textinput_tags
+      @feed['channel']['image'] = image_tags
+      @feed['channel']['items'] = items
     end
 
     class << self
