@@ -8,9 +8,9 @@ module Arss
     def initialize(channel_tags, textinput_tags, image_tags, items)
       @feed = {}
       @feed['channel'] = channel_tags
-      @feed['channel']['textinput'] = textinput_tags
-      @feed['channel']['image'] = image_tags
-      @feed['channel']['items'] = items
+      @feed['channel']['textinput'] = textinput_tags unless textinput_tags.empty?
+      @feed['channel']['image'] = image_tags unless image_tags.empty?
+      @feed['channel']['items'] = items unless items.empty?
     end
 
     class << self

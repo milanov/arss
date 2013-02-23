@@ -33,8 +33,9 @@ module Arss
     #
     #   extract_subtag_text('<xml><tag>text</tag></xml>', 'tag')
     #   # => ''
-
-    # TODO HERE -> WARNING
+    #
+    # NOTICE to you, examiners. This method does not work correctly, but I'm trying my best to correct it.
+    # NOTICE to me, use an Automata :)
     def extract_subtag_text(text, subtag)
       if text =~ /(?<tag><#{subtag}( [^ \/>]+)*?>(?<tag_text>.*?)<\/#{subtag}>)/m
         tag, tag_text =  $~[:tag], $~[:tag_text]

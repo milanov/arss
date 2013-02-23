@@ -29,7 +29,8 @@ module Arss
       feed = ExtractData.extract_tag_text(feed, tag)
 
       subtags.each do |sub|
-        sub_text = ExtractData.extract_subtag_text(feed, sub)
+        # Should be exctract_subtag_text here, after the correction
+        sub_text = ExtractData.extract_tag_text(feed, sub)
         extracted_subtags[sub] = TransformData.tag_to_plaintext(sub_text) unless sub_text.empty?
       end
 

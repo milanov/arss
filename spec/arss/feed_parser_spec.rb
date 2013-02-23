@@ -5,8 +5,8 @@ require 'spec_helper'
 module Arss
   describe FeedParser do
     describe 'parse' do
-      it 'returns an empty hash if the feed is not valid' do
-        FeedParser.parse('I see dead people.').feed.should be_empty
+      it 'returns an empty hash structure if the feed is not valid' do
+        FeedParser.parse('I see dead people.').feed.should eq({'channel' => {}})
       end
 
       # serves mainly as an example of how to use the parser and what it returns
@@ -48,8 +48,8 @@ module Arss
     end
 
     describe 'parse_uri' do
-      it 'returns an empty feed if the url(or file resource) is not reachable or does not exist' do
-        FeedParser.parse_uri('fake/feed.rss').feed.should be_empty
+      it 'returns an empty feed structure if the url(or file resource) is not reachable or does not exist' do
+        FeedParser.parse_uri('fake/feed.rss').feed.should eq({'channel' => {}})
       end
 
       it 'parses the feed if the url(or file resource) is valid and exists' do
