@@ -6,42 +6,42 @@ xml text should be parsed.
 **NOTE:** This is a univercity related project, so don't rely on it in a production environment.
 
 ##Example:
-  feed = <<-FEED
-  <rss>
-    <!-- look at me now -->
-    <channel>
-      <title>Pedro Almodovar</title>
-      <description><![CDATA[A list of some of <description>Almodovar's</description> best movies.]]></description>
-      <image>
-        <width>2</width>
-        <height>2</height>
-      </image>
-      <item>
-        <title>La piel que habito</title>
-        <description>A brilliant plastic surgeon, haunted by past tragedies..</description>
-      </item>
-      <item>
-        <title>Hable con ella</title>
-        <description>Two men share an odd friendship while they care for..</description>
-      </item>
-    </channel>
-  </rss>
-  FEED
+    feed = <<-FEED
+    <rss>
+      <!-- look at me now -->
+      <channel>
+        <title>Pedro Almodovar</title>
+        <description><![CDATA[A list of some of <description>Almodovar's</description> best movies.]]></description>
+        <image>
+          <width>2</width>
+          <height>2</height>
+        </image>
+        <item>
+          <title>La piel que habito</title>
+          <description>A brilliant plastic surgeon, haunted by past tragedies..</description>
+        </item>
+        <item>
+          <title>Hable con ella</title>
+          <description>Two men share an odd friendship while they care for..</description>
+        </item>
+      </channel>
+    </rss>
+    FEED
 
-  require 'arss'
-  Arss::FeedParser.parse(feed)
+    require 'arss'
+    Arss::FeedParser.parse(feed)
 
-  # {"channel"=>
-  # {"title"=>"Pedro Almodovar",
-  # "description"=>"A list of some of Almodovar's best movies."
-  # "image"=>{"width"=>"2", "height"=>"2"},
-  # "items"=>
-  #  [{"title"=>"La piel que habito",
-  #    "description"=>
-  #     "A brilliant plastic surgeon, haunted by past tragedies.."},
-  #   {"title"=>"Hable con ella",
-  #    "description"=>
-  #     "Two men share an odd friendship while they care for.."}]}}
+    # {"channel"=>
+    # {"title"=>"Pedro Almodovar",
+    # "description"=>"A list of some of Almodovar's best movies."
+    # "image"=>{"width"=>"2", "height"=>"2"},
+    # "items"=>
+    #  [{"title"=>"La piel que habito",
+    #    "description"=>
+    #     "A brilliant plastic surgeon, haunted by past tragedies.."},
+    #   {"title"=>"Hable con ella",
+    #    "description"=>
+    #     "Two men share an odd friendship while they care for.."}]}}
 
 ##Contributing to arss:
 
